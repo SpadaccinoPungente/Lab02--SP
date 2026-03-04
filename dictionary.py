@@ -19,5 +19,7 @@ class Dictionary:
         pass
 
     def printDizionarioAlieno(self):
-        for elem in self.dizionario_alieno:
-            print(elem)
+        for parola_aliena, traduzioni in self.dizionario_alieno.items():
+            print(f"{parola_aliena} ==> {traduzioni}")
+            # for trad in traduzioni:
+                # print(trad, end=" ")
