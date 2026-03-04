@@ -17,7 +17,7 @@ le lettere alfabetiche, siano essere maiuscole o minuscole), ma la ricerca deve 
 suggerisce di convertire tutto il testo ricevuto in minuscolo prima di elaborarlo.
 """
 
-
+# SISTEMARE PROBLEMA DUPLICATI SU TRADUZIONI
 
 import translator as tr
 
@@ -34,12 +34,13 @@ while running:
 
     txtIn = input()
 
-    input_accettabili = {"1", "2", "3", "4"}
+    input_accettabili = {"1", "2", "3", "4", "5"}
 
     # 1. Aggiungi nuova parola
     # 2. Cerca una traduzione
     # 3. Cerca con wildcard
-    # 4. Exit
+    # 4. Stampa dizionario corrente
+    # 5. Exit
 
     if txtIn not in input_accettabili:
         raise ValueError
@@ -57,5 +58,8 @@ while running:
         txtIn = input()
         t.handleWildCard(txtIn)
     elif int(txtIn) == 4:
+        print("Ok, ecco il dizionario corrente:\n")
+        t.handlePrint()
+    elif int(txtIn) == 5:
         print("Ok, termino programma.")
         running = False

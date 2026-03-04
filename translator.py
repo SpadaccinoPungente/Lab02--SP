@@ -13,7 +13,8 @@ class Translator:
         print("1. Aggiungi una nuova parola")
         print("2. Cerca una traduzione")
         print("3. Cerca con wildcard")
-        print("4. Exit")
+        print("4. Stampa dizionario corrente")
+        print("5. Exit")
         print("-" * 30)
 
     def loadDictionary(self, dict):
@@ -61,6 +62,7 @@ class Translator:
             print("Errore: la parola aliena può contenere solo lettere.")
             return
 
+        print(query)
         traduzioni_trovate = self.diz.translate(query)
 
         if traduzioni_trovate is not None:
@@ -70,4 +72,19 @@ class Translator:
 
     def handleWildCard(self, query):
         # query is a string with a ? --> <par?la_aliena>
-        pass
+        query = query.strip()
+        query = query.lower()
+
+        if not query.isalpha():
+            print("Errore: la parola aliena può contenere solo lettere.")
+            return
+
+        traduzioni_trovate = self.diz.translateWordWildCard(query)
+
+        if traduzioni_trovate is not None:
+            print(traduzioni_trovate)
+        else:
+            print("Parola non presente nel dizionario.")
+
+    def handlePrint(self):
+        self.diz.printDizionarioAlieno()

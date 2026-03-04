@@ -1,19 +1,23 @@
 class Dictionary:
 
     def __init__(self):
-        self.dizioniario_alieno = {}
+        self.dizionario_alieno = dict()
 
     def addWord(self, parola_aliena, traduzione):
-        if parola_aliena in self.dizioniario_alieno:
-            self.dizioniario_alieno[parola_aliena].append(traduzione)
+        if parola_aliena in self.dizionario_alieno.keys():
+            self.dizionario_alieno[parola_aliena].add(traduzione)
         else:
-            self.dizioniario_alieno[parola_aliena] = [traduzione]
+            self.dizionario_alieno[parola_aliena] = {traduzione}
 
     def translate(self, query):
-        if query in self.dizioniario_alieno:
-            return self.dizioniario_alieno[query]
+        if query in self.dizionario_alieno:
+            return self.dizionario_alieno[query]
         else:
             return None
 
-    def translateWordWildCard(self):
+    def translateWordWildCard(self, query):
         pass
+
+    def printDizionarioAlieno(self):
+        for elem in self.dizionario_alieno:
+            print(elem)
