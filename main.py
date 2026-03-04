@@ -19,17 +19,14 @@ suggerisce di convertire tutto il testo ricevuto in minuscolo prima di elaborarl
 
 
 
-
 import translator as tr
 
 t = tr.Translator()
 
 
-def controllaInput(txtIn):
-    pass
+running = True
 
-
-while(True):
+while running:
 
     t.printMenu()
 
@@ -37,31 +34,28 @@ while(True):
 
     txtIn = input()
 
-    acceptable_inputs = {"1", "2", "3", "4"}
+    input_accettabili = {"1", "2", "3", "4"}
 
     # 1. Aggiungi nuova parola
     # 2. Cerca una traduzione
     # 3. Cerca con wildcard
     # 4. Exit
 
-    if txtIn not in acceptable_inputs:
+    if txtIn not in input_accettabili:
         raise ValueError
 
     if int(txtIn) == 1:
         print("Ok, quale parola devo aggiungere?")
         txtIn = input()
-        if controllaInput(txtIn):
-            t.handleAdd(txtIn)
-    if int(txtIn) == 2:
+        t.handleAdd(txtIn)
+    elif int(txtIn) == 2:
         print("Ok, quale parola devo cercare?")
         txtIn = input()
-        if controllaInput(txtIn):
-            t.handleTranslate(txtIn)
-    if int(txtIn) == 3:
+        t.handleTranslate(txtIn)
+    elif int(txtIn) == 3:
         print("Ok, quale parola devo cercare (wildcard)?")
         txtIn = input()
-        if controllaInput(txtIn):
-            t.handleWildCard(txtIn)
-    if int(txtIn) == 4:
+        t.handleWildCard(txtIn)
+    elif int(txtIn) == 4:
         print("Ok, termino programma.")
-        break
+        running = False

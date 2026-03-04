@@ -26,14 +26,47 @@ class Translator:
                     traduzione = campi[1].lower()
                     self.diz.addWord(parola_aliena, traduzione)
 
-
     def handleAdd(self, entry):
-        # entry is a tuple <parola_aliena> <traduzione1 traduzione2 ...>
-        pass
+        # entry is a string <parola_aliena> <traduzione1 traduzione2 ...>
+        entry = entry.lower()
+        campi = entry.split()
+
+        if len(campi) < 2:
+            print("Errore: formato entry non valido.\nInserire: <parola_aliena> <traduzione1 traduzione2 ...>")
+            return
+
+        parola_aliena = campi[0]
+
+        if not parola_aliena.isalpha():
+            print("Errore: la parola aliena può contenere solo lettere.")
+            return
+
+        traduzioni = campi[1:]
+        print(campi)
+
+        for trad in traduzioni:
+            if trad.isalpha:
+                self.diz.addWord(parola_aliena, trad)
+            else:
+                print(f"Errore: la traduzione {trad} contiene caratteri non validi e verrà scartata.")
+
+        print("Aggiunta!")
 
     def handleTranslate(self, query):
         # query is a string <parola_aliena>
-        pass
+        query = query.strip()
+        query = query.lower()
+
+        if not query.isalpha():
+            print("Errore: la parola aliena può contenere solo lettere.")
+            return
+
+        traduzioni_trovate = self.diz.translate(query)
+
+        if traduzioni_trovate is not None:
+            print(traduzioni_trovate)
+        else:
+            print("Parola non presente nel dizionario.")
 
     def handleWildCard(self, query):
         # query is a string with a ? --> <par?la_aliena>
