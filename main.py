@@ -25,15 +25,24 @@ import translator as tr
 t = tr.Translator()
 
 
+def controllaInput(txtIn):
+    pass
+
+
 while(True):
 
     t.printMenu()
 
-    t.loadDictionary("filename.txt")
+    t.loadDictionary("dictionary.txt")
 
     txtIn = input()
 
-    acceptable_inputs = {1, 2, 3, 4, 5}
+    acceptable_inputs = {"1", "2", "3", "4"}
+
+    # 1. Aggiungi nuova parola
+    # 2. Cerca una traduzione
+    # 3. Cerca con wildcard
+    # 4. Exit
 
     if txtIn not in acceptable_inputs:
         raise ValueError
@@ -41,16 +50,18 @@ while(True):
     if int(txtIn) == 1:
         print("Ok, quale parola devo aggiungere?")
         txtIn = input()
-        t.handleAdd(txtIn)
+        if controllaInput(txtIn):
+            t.handleAdd(txtIn)
     if int(txtIn) == 2:
         print("Ok, quale parola devo cercare?")
         txtIn = input()
-        t.handleTranslate(txtIn)
+        if controllaInput(txtIn):
+            t.handleTranslate(txtIn)
     if int(txtIn) == 3:
         print("Ok, quale parola devo cercare (wildcard)?")
         txtIn = input()
-        t.handleWildCard(txtIn)
+        if controllaInput(txtIn):
+            t.handleWildCard(txtIn)
     if int(txtIn) == 4:
         print("Ok, termino programma.")
         break
-

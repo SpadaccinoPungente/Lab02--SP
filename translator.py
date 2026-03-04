@@ -1,7 +1,10 @@
+from dictionary import Dictionary
+
+
 class Translator:
 
     def __init__(self):
-        pass
+        self.diz = Dictionary()
 
     def printMenu(self):
         print("-"*30)
@@ -15,13 +18,14 @@ class Translator:
 
     def loadDictionary(self, dict):
         # dict is a string with the filename of the dictionary
-        words = []
         with open(dict, "r", encoding="utf-8") as fin:
             for riga in fin:
                 campi = riga.split()
-                tupla = (campi[0], campi[1])
-                words.append(tupla)
-            return words
+                if len(campi) >= 2:
+                    parola_aliena = campi[0].lower()
+                    traduzione = campi[1].lower()
+                    self.diz.addWord(parola_aliena, traduzione)
+
 
     def handleAdd(self, entry):
         # entry is a tuple <parola_aliena> <traduzione1 traduzione2 ...>
