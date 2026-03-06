@@ -17,20 +17,17 @@ le lettere alfabetiche, siano essere maiuscole o minuscole), ma la ricerca deve 
 suggerisce di convertire tutto il testo ricevuto in minuscolo prima di elaborarlo.
 """
 
-# SISTEMARE PROBLEMA DUPLICATI SU TRADUZIONI
-
 import translator as tr
 
 t = tr.Translator()
 
+t.loadDictionary("dictionary.txt")
 
 running = True
 
 while running:
 
     t.printMenu()
-
-    t.loadDictionary("dictionary.txt")
 
     txtIn = input()
 
@@ -43,23 +40,28 @@ while running:
     # 5. Exit
 
     if txtIn not in input_accettabili:
-        raise ValueError
+        print("Scelta non valida, riprova.")
+        continue
 
-    if int(txtIn) == 1:
+    if txtIn == "1":
         print("Ok, quale parola devo aggiungere?")
         txtIn = input()
         t.handleAdd(txtIn)
-    elif int(txtIn) == 2:
+    elif txtIn == "2":
         print("Ok, quale parola devo cercare?")
         txtIn = input()
         t.handleTranslate(txtIn)
-    elif int(txtIn) == 3:
+    elif txtIn == "3":
         print("Ok, quale parola devo cercare (wildcard)?")
         txtIn = input()
         t.handleWildCard(txtIn)
-    elif int(txtIn) == 4:
-        print("Ok, ecco il dizionario corrente:\n")
-        t.handlePrint()
-    elif int(txtIn) == 5:
+    elif txtIn == "4":
+        print("Ok, dove vuoi salvare il dizionario corrente? Premi Invio per 'output.txt'.")
+        txtIn = input()
+        if txtIn:
+            t.handlePrint(txtIn)
+        else:
+            t.handlePrint()
+    elif txtIn == "5":
         print("Ok, termino programma.")
         running = False

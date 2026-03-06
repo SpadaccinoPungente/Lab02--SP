@@ -46,7 +46,7 @@ class Translator:
         print(campi)
 
         for trad in traduzioni:
-            if trad.isalpha:
+            if trad.isalpha():
                 self.diz.addWord(parola_aliena, trad)
             else:
                 print(f"Errore: la traduzione {trad} contiene caratteri non validi e verrà scartata.")
@@ -65,7 +65,7 @@ class Translator:
         print(query)
         traduzioni_trovate = self.diz.translate(query)
 
-        if traduzioni_trovate is not None:
+        if traduzioni_trovate:
             print(traduzioni_trovate)
         else:
             print("Parola non presente nel dizionario.")
@@ -75,16 +75,31 @@ class Translator:
         query = query.strip()
         query = query.lower()
 
-        if not query.isalpha():
+        if query.count("?") != 1:
+            print("Errore: la parola da cercare deve contenere esattamente un solo simbolo '?'.")
+            return
+
+        # sostituire "?" con stringa vuota e usare .isalpha()
+        query_senza_jolly = query.replace("?", "")
+        if not query_senza_jolly.isalpha():
             print("Errore: la parola aliena può contenere solo lettere.")
             return
 
         traduzioni_trovate = self.diz.translateWordWildCard(query)
 
-        if traduzioni_trovate is not None:
+        if traduzioni_trovate:  # se la lista restituita non è vuota
             print(traduzioni_trovate)
         else:
-            print("Parola non presente nel dizionario.")
+            print("Nessuna corrispondenza trovata nel dizionario.")
 
-    def handlePrint(self):
-        self.diz.printDizionarioAlieno()
+    def handlePrint(self, filename="output.txt"):
+        dizionario_corrente = self.diz.getDizionarioAlieno()
+
+        print(f"Stampa dizionario corrente nel file '{filename}' in corso...")
+
+        with open(filename, "w", encoding="utf-8") as fout:
+            for parola_aliena, traduzioni in dizionario_corrente.items():
+                traduzioni_formattate = " ".join(traduzioni) # .join() per unire tutte le traduzioni con uno spazio
+                fout.write(f"{parola_aliena} {traduzioni_formattate}\n")
+
+        print("Finito!")
