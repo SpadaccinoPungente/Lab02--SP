@@ -17,9 +17,9 @@ class Translator:
         print("5. Exit")
         print("-" * 30)
 
-    def loadDictionary(self, dict):
+    def loadDictionary(self, filename):
         # dict is a string with the filename of the dictionary
-        with open(dict, "r", encoding="utf-8") as fin:
+        with open(filename, "r", encoding="utf-8") as fin:
             for riga in fin:
                 campi = riga.split()
                 if len(campi) >= 2:
